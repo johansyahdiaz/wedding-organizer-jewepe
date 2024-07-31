@@ -49,6 +49,10 @@ include(__DIR__ . '/../includes/function.php');
               <a class="text-gray-500 transition hover:text-gray-500/75" href="<?php echo url('admin/bookings/index.php'); ?>">Manage Bookings </a>
             </li>
 
+            <li>
+              <a class="text-gray-500 transition hover:text-gray-500/75" href="<?php echo url('admin/settings.php'); ?>">Settings </a>
+            </li>
+
           </ul>
        
 

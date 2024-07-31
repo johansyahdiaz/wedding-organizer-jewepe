@@ -3,11 +3,10 @@ session_start();
 include('../includes/db_connection.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Bersihkan dan validasi input
+    
     $username = $conn->real_escape_string($_POST['username']);
     $password = $_POST['password'];
 
-    // Siapkan dan eksekusi query untuk mengambil password hash dari database
     $sql = $conn->prepare("SELECT password FROM admins WHERE username=?");
     $sql->bind_param("s", $username);
     $sql->execute();
