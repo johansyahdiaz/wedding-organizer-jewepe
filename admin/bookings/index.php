@@ -9,39 +9,53 @@ $result = $conn->query($sql);
 
 <main class="container mt-5">
     <h1>Manage Bookings</h1>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Service</th>
-                <th>Customer Name</th>
-                <th>Customer Phone</th>
-                <th>Customer Email</th>
-                <th>Booking Date</th>
-                <th>Status</th>
-                <th>Booking Number</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php while($row = $result->fetch_assoc()): ?>
-                <tr>
-                    <td><?php echo $row['id']; ?></td>
-                    <td><?php echo $row['service_name']; ?></td>
-                    <td><?php echo $row['customer_name']; ?></td>
-                    <td><?php echo $row['customer_phone']; ?></td>
-                    <td><?php echo $row['customer_email']; ?></td>
-                    <td><?php echo $row['booking_date']; ?></td>
-                    <td><?php echo $row['status']; ?></td>
-                    <td><?php echo $row['booking_number']; ?></td>
-                    <td>
-                        <a href="update.php?id=<?php echo $row['id']; ?>" class="btn btn-warning btn-sm">Update</a>
-                        <a href="delete.php?id=<?php echo $row['id']; ?>" class="btn btn-danger btn-sm">Delete</a>
-                    </td>
-                </tr>
-            <?php endwhile; ?>
-        </tbody>
-    </table>
+    
+    <div class="overflow-x-auto">
+  <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+    <thead class="ltr:text-left rtl:text-right">
+      <tr>
+        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">ID</th>
+        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Service</th>
+        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Customer Name</th>
+        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Customer Phone</th>
+        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Customer Email</th>
+        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Booking Date</th>
+        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Status</th>
+        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Booking Number</th>
+        <th class="px-4 py-2"></th>
+      </tr>
+    </thead>
+
+    <tbody class="divide-y divide-gray-200">
+    <?php while($row = $result->fetch_assoc()): ?>
+      <tr>
+        <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900"><?php echo $row['id']; ?></td>
+        <td class="whitespace-nowrap px-4 py-2 text-gray-700"><?php echo $row['service_name']; ?></td>
+        <td class="whitespace-nowrap px-4 py-2 text-gray-700"><?php echo $row['customer_name']; ?></td>
+        <td class="whitespace-nowrap px-4 py-2 text-gray-700"><?php echo $row['customer_phone']; ?></td>
+        <td class="whitespace-nowrap px-4 py-2 text-gray-700"><?php echo $row['customer_email']; ?></td>
+        <td class="whitespace-nowrap px-4 py-2 text-gray-700"><?php echo $row['booking_date']; ?></td>
+        <td class="whitespace-nowrap px-4 py-2 text-gray-700"><?php echo $row['status']; ?></td>
+        <td class="whitespace-nowrap px-4 py-2">
+          <a
+            href="update.php?id=<?php echo $row['id']; ?>"
+            class="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700"
+          >
+            Update
+          </a>
+          <a
+            href="delete.php?id=<?php echo $row['id']; ?>"
+            class="inline-block rounded bg-red-600 px-4 py-2 text-xs font-medium text-white hover:bg-red-700"
+          >
+            Delete
+          </a>
+        </td>
+
+      </tr>
+      <?php endwhile; ?>
+    </tbody>
+  </table>
+</div>
 </main>
 
 <?php include('../../includes/footer.php'); ?>

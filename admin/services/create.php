@@ -4,6 +4,7 @@ if (!isset($_SESSION['admin_logged_in'])) {
     header("Location: ../login.php");
     exit();
 }
+ob_start();
 include('../../includes/db_connection.php');
 include('../../includes/header.php');
 
@@ -28,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['error'] = "Error: " . $sql . "<br>" . $conn->error;
     }
 }
-
+ob_end_flush();
 ?>
 
 <main>

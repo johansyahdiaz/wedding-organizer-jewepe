@@ -1,37 +1,112 @@
 <?php
 session_start();
+if (!file_exists('../includes/db_connection.php') || !file_exists('../includes/header.php')) {
+    die("Required files are missing.");
+}
 include('../includes/db_connection.php');
 include('../includes/header.php');
 ?>
 
 <body>
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <h2 class="mt-5">Admin Login</h2>
-            <?php
-            if(isset($_SESSION['error'])){
-                echo "<div class='alert alert-danger'>".$_SESSION['error']."</div>";
-                unset($_SESSION['error']);
-            }
-            ?>
-            <form action="login_process.php" method="POST">
-                <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" required>
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Login</button>
-            </form>
-        </div>
+<div class="my-5 mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+  <div class="mx-auto max-w-lg text-center">
+    <h1 class="text-2xl font-bold sm:text-3xl">Login Untuk Admin</h1>
+
+    <p class="mt-4 text-gray-500">
+    JeWePe Wedding Organizer website untuk memesan layanan wedding 
+    </p>
+  </div>
+  
+  <?php
+  if (isset($_SESSION['error'])) {
+      echo "<div class='alert alert-danger'>" . htmlspecialchars($_SESSION['error']) . "</div>";
+      unset($_SESSION['error']);
+  }
+  ?>
+
+  <form action="login_process.php" method="POST" class="mx-auto mb-0 mt-8 max-w-md space-y-4">
+    <div>
+      <label for="username" class="sr-only">Email</label>
+      <div class="relative">
+        <input
+          type="text"
+          class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+          placeholder="Enter username"
+          id="username" 
+          name="username"
+          required
+        />
+        <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-6 h-6 text-gray-400"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
+            />
+          </svg>
+        </span>
+      </div>
     </div>
+
+    <div>
+      <label for="password" class="sr-only">Password</label>
+      <div class="relative">
+        <input
+          type="password"
+          class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+          placeholder="Enter password"
+          id="password" 
+          name="password"
+          required
+        />
+        <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-6 h-6 text-gray-400"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+            />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+            />
+          </svg>
+        </span>
+      </div>
+    </div>
+
+
+
+      <button
+        type="submit"
+        class="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
+      >
+        Sign in
+      </button>
+    </div>
+  </form>
 </div>
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
 </body>
 
 <?php 
-include('../includes/footer.php');
+if (file_exists('../includes/footer.php')) {
+    include('../includes/footer.php');
+}
 ?>

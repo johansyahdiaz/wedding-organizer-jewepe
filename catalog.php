@@ -12,17 +12,35 @@ $result = $conn->query($sql);
         <?php
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
-                echo "<div class='col-md-4 mb-4'>
-                        <div class='card'>
-                            <img src='uploads/service_images/{$row['image_url']}' class='card-img-top' alt='{$row['name']}'>
-                            <div class='card-body'>
-                                <h5 class='card-title'>{$row['name']}</h5>
-                                <p class='card-text'>{$row['description']}</p>
-                                <p class='card-text'>Price: {$row['price']}</p>
-                                <a href='catalog_detail.php?id={$row['id']}' class='btn btn-primary'>Details</a>
-                            </div>
-                        </div>
-                      </div>";
+                echo '
+<a href="catalog_detail.php?id=' . $row['id'] . '" class=" my-8 relative block rounded-tr-3xl border border-gray-100">
+  <span
+    class="absolute -right-px -top-px rounded-bl-3xl rounded-tr-3xl bg-rose-600 px-6 py-4 font-medium uppercase tracking-widest text-white"
+  >
+    Rp. ' . $row['price'] . '
+  </span>
+
+  <img
+    src="uploads/service_images/' . $row['image_url'] . '"
+    alt="' . $row['name'] . '"
+    class="h-80 w-full rounded-tr-3xl object-cover"
+  />
+
+  <div class="p-4 text-center">
+    <strong class="text-xl font-medium text-gray-900"> ' . $row['name'] . ' </strong>
+
+    <p class="mt-2 text-pretty text-gray-700">
+    ' . $row['description'] . '
+    </p>
+
+    <span
+      class="mt-4 block rounded-md border border-indigo-900 bg-indigo-900 px-5 py-3 text-sm font-medium uppercase tracking-widest text-white transition-colors hover:bg-white hover:text-indigo-900"
+    >
+      Learn More
+    </span>
+  </div>
+</a>
+                      ';
             }
         } else {
             echo "<p>No services available.</p>";

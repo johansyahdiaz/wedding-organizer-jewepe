@@ -4,6 +4,7 @@ if (!isset($_SESSION['admin_logged_in'])) {
     header("Location: ../login.php");
     exit();
 }
+ob_start();
 include('../../includes/db_connection.php');
 include('../../includes/header.php');
 
@@ -26,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $description = $_POST['description'];
     $price = $_POST['price'];
     $published = isset($_POST['published']) ? 1 : 0;
-    
+
     $image = $_FILES['image']['name'];
     $target = "../../uploads/service_images/" . basename($image);
 
@@ -45,11 +46,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['error'] = "Failed to upload image.";
         }
         header("Location: index.php");
+        exit();
     } else {
         $_SESSION['error'] = "Error: " . $sql . "<br>" . $conn->error;
     }
 }
-
+ob_end_flush();
 ?>
 
 <main>

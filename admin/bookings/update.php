@@ -1,4 +1,5 @@
 <?php
+ob_start(); // Start output buffering
 include('../../includes/db_connection.php');
 include('../../includes/header.php');
 
@@ -24,6 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 $conn->close();
+ob_end_flush(); // Flush output buffer and send output to browser
 ?>
 
 <main class="container mt-5">
